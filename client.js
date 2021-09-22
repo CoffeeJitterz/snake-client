@@ -6,6 +6,12 @@ const connect = function () {
     host: '135.23.223.133',
     port: 50542
   });
+  //notifies when connection is succesfull
+  conn.on('connect', () => {
+    console.log('Your Snake Is In The Game!')
+    conn.write('Name:  JAM')
+  })
+
   //accepts incoming data from server
   conn.on('data',(data) => {
     console.log(data);
