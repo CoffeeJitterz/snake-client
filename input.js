@@ -1,6 +1,28 @@
+const connect = require("./client");
+
+let connection;
+
 // setup interface to handle user input from stdin
-const setupInput = function () {
+const setupInput = function (conn) {
+  connection = conn;
   const stdin = process.stdin;
+  const handleUserInput = function (key) {
+    if (key === 'w') {
+      conn.write("Move: up");
+    }
+    if (key ==='a') {
+      conn.write("Move: left");
+    }
+    if (key ==='s') {
+      conn.write("Move: down");
+    }
+    if (key ==='d') {
+      conn.write("Move: right");
+    }
+    if (key === '\u0003') {
+      process.exit();
+    }
+  }
   stdin.setRawMode(true);
   stdin.setEncoding("utf8");
   stdin.resume();
@@ -8,10 +30,5 @@ const setupInput = function () {
   return stdin;
 };
 
-const handleUserInput = function () {
-  if ('\u0003') {
-    process.exit();
-  }
-}
 
 module.exports = setupInput;
